@@ -34,26 +34,30 @@
       position: absolute;
       display: block;
       z-index: 11;
+      box-sizing: border-box;
       pointer-events: auto;
       cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 10px;
+      border: 3px solid transparent;
+      border-radius: 50%;
       background: transparent;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: rgba(250, 204, 21, 0.45);
     }
 
     .map-hotspots a:hover,
     .map-hotspots a:focus-visible {
       border-color: #facc15;
-      background: rgba(250, 204, 21, 0.18);
-      box-shadow: 0 0 14px 5px rgba(250, 204, 21, 0.8);
+      background: rgba(250, 204, 21, 0.35);
+      box-shadow:
+        0 0 0 4px rgba(250, 204, 21, 0.25),
+        0 0 22px 10px rgba(250, 204, 21, 0.95);
       outline: none;
     }
 
     .map-hotspots a:active {
       border-color: #ffffff;
-      background: rgba(34, 197, 94, 0.3);
-      box-shadow: 0 0 18px 7px rgba(34, 197, 94, 0.9);
+      background: rgba(34, 197, 94, 0.45);
+      box-shadow: 0 0 24px 12px rgba(34, 197, 94, 0.95);
     }
 
     .map-hotspots a:focus {
@@ -65,7 +69,9 @@
 <body>
   <header class="site-header">
     <div class="brand">CẨM NANG ĐIỆN TỬ KHU VỰC BIÊN GIỚI</div>
-    <div class="subtitle">Học cụ số trực quan về hệ thống mốc quốc giới tỉnh Đắk Lắk</div>
+    <div class="subtitle">
+      Học cụ số trực quan về hệ thống mốc quốc giới tỉnh Đắk Lắk
+    </div>
     <nav class="nav">
       <a href="index.html">Trang chủ</a>
       <a href="saban.html">Sa bàn 3D</a>
@@ -73,52 +79,85 @@
   </header>
 
   <main class="container">
-    <p class="breadcrumb"><a href="index.html">Trang chủ</a> / Sa bàn</p>
+    <p class="breadcrumb">
+      <a href="index.html">Trang chủ</a> / Sa bàn
+    </p>
+
     <h1>Sa bàn hệ thống mốc quốc giới</h1>
-    <p class="muted">Rê chuột hoặc chọn vùng cột mốc để làm sáng vị trí; bấm để mở trang thông tin chi tiết.</p>
+
+    <p class="muted">
+      Rê chuột vào vùng cột mốc để làm sáng vị trí.
+      Bấm vào cột mốc để mở trang thông tin chi tiết.
+    </p>
 
     <div class="map-frame">
-      <img src="assets/sa-ban-3d.png" alt="Sa bàn hệ thống mốc quốc giới">
+      <img
+        src="assets/sa-ban-3d.png"
+        alt="Sa bàn hệ thống mốc quốc giới"
+      >
 
       <div class="map-hotspots">
-        <a href="pages/moc-41.html" aria-label="Mở thông tin mốc 41" title="Mốc 41"
+        <a href="pages/moc-41.html"
+           aria-label="Mở thông tin mốc 41"
+           title="Mốc 41"
            style="left:9%;top:4%;width:10%;height:17%"></a>
 
-        <a href="pages/moc-42.html" aria-label="Mở thông tin mốc 42" title="Mốc 42"
+        <a href="pages/moc-42.html"
+           aria-label="Mở thông tin mốc 42"
+           title="Mốc 42"
            style="left:9%;top:23%;width:10%;height:17%"></a>
 
-        <a href="pages/moc-44.html" aria-label="Mở thông tin mốc 44" title="Mốc 44"
+        <a href="pages/moc-44.html"
+           aria-label="Mở thông tin mốc 44"
+           title="Mốc 44"
            style="left:10%;top:42%;width:11%;height:17%"></a>
 
-        <a href="pages/moc-45.html" aria-label="Mở thông tin mốc 45" title="Mốc 45"
+        <a href="pages/moc-45.html"
+           aria-label="Mở thông tin mốc 45"
+           title="Mốc 45"
            style="left:18%;top:59%;width:10%;height:17%"></a>
 
-        <a href="pages/moc-46.html" aria-label="Mở thông tin mốc 46" title="Mốc 46"
+        <a href="pages/moc-46.html"
+           aria-label="Mở thông tin mốc 46"
+           title="Mốc 46"
            style="left:23%;top:72%;width:10%;height:17%"></a>
 
-        <a href="pages/moc-47.html" aria-label="Mở thông tin mốc 47" title="Mốc 47"
+        <a href="pages/moc-47.html"
+           aria-label="Mở thông tin mốc 47"
+           title="Mốc 47"
            style="left:28%;top:84%;width:10%;height:15%"></a>
       </div>
     </div>
 
     <div class="marker-grid">
       <a class="marker-card" href="pages/moc-41.html">
-        <span class="marker-number">41</span><strong>Mốc số 41</strong>
+        <span class="marker-number">41</span>
+        <strong>Mốc số 41</strong>
       </a>
+
       <a class="marker-card" href="pages/moc-42.html">
-        <span class="marker-number">42</span><strong>Mốc số 42</strong>
+        <span class="marker-number">42</span>
+        <strong>Mốc số 42</strong>
       </a>
+
       <a class="marker-card" href="pages/moc-44.html">
-        <span class="marker-number">44</span><strong>Mốc số 44</strong>
+        <span class="marker-number">44</span>
+        <strong>Mốc số 44</strong>
       </a>
+
       <a class="marker-card" href="pages/moc-45.html">
-        <span class="marker-number">45</span><strong>Mốc số 45</strong>
+        <span class="marker-number">45</span>
+        <strong>Mốc số 45</strong>
       </a>
+
       <a class="marker-card" href="pages/moc-46.html">
-        <span class="marker-number">46</span><strong>Mốc số 46</strong>
+        <span class="marker-number">46</span>
+        <strong>Mốc số 46</strong>
       </a>
+
       <a class="marker-card" href="pages/moc-47.html">
-        <span class="marker-number">47</span><strong>Mốc số 47</strong>
+        <span class="marker-number">47</span>
+        <strong>Mốc số 47</strong>
       </a>
     </div>
   </main>
@@ -128,9 +167,12 @@
   </footer>
 
   <script>
-    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    if ("serviceWorker" in navigator &&
+        location.protocol.startsWith("http")) {
       addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .catch(() => {});
       });
     }
   </script>
