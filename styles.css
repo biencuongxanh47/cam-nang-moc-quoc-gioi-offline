@@ -69,7 +69,7 @@ h2 {
   background: linear-gradient(135deg, #e5f5e9, #fff);
 }
 
-/* Bố cục các ô mốc quốc giới trên trang chủ */
+/* Các ô mốc quốc giới */
 .marker-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -120,7 +120,38 @@ h2 {
   margin-top: 3px;
 }
 
-/* Các bố cục dùng chung trong những trang khác */
+/* Sa bàn và vùng bấm trên ảnh */
+.map-frame {
+  position: relative;
+  width: 100%;
+  margin: 16px 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.map-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.map-hotspots a {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  z-index: 6;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0);
+}
+
+/* Bố cục dùng chung */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -148,11 +179,13 @@ h2 {
   color: #14532d;
 }
 
+.breadcrumb,
 .breadcrumbs {
   font-size: 14px;
   color: #526358;
 }
 
+.breadcrumb a,
 .breadcrumbs a {
   color: #166534;
 }
@@ -163,7 +196,8 @@ h2 {
   padding: 10px 12px;
 }
 
-.button {
+.button,
+.primary-button {
   display: inline-block;
   background: #166534;
   color: white;
@@ -173,7 +207,8 @@ h2 {
   margin: 5px 5px 5px 0;
 }
 
-footer {
+footer,
+.site-footer {
   text-align: center;
   padding: 24px;
   color: #526358;
@@ -185,7 +220,55 @@ img {
   height: auto;
 }
 
-/* Bố cục trên máy tính bảng và điện thoại */
+.section-list {
+  display: grid;
+  gap: 10px;
+}
+
+.content-panel {
+  background: white;
+  border: 1px solid #d5e4d8;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.content-panel h2 {
+  font-size: 18px;
+}
+
+.placeholder {
+  background: #fff6e5;
+  border-left: 3px solid #d99a22;
+  padding: 10px;
+}
+
+.info-panel {
+  background: white;
+  border: 1px solid #d5e4d8;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.section {
+  margin: 18px 0;
+}
+
+.note {
+  padding: 0;
+}
+
+.muted {
+  color: #526358;
+}
+
+/* Máy tính bảng và điện thoại */
 @media (max-width: 700px) {
   .grid,
   .marker-grid {
@@ -198,6 +281,10 @@ img {
 
   .container {
     padding: 0 12px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
   }
 }
 
