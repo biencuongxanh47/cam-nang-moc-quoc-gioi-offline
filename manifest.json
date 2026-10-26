@@ -1,0 +1,10 @@
+{
+  "name": "Cẩm nang mốc quốc giới tỉnh Đắk Lắk",
+  "short_name": "Cẩm nang mốc",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8f6",
+  "theme_color": "#14532d",
+  "lang": "vi"
+}
