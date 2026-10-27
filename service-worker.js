@@ -1,5 +1,5 @@
 
-const C = 'cam-nang-offline-v2';
+const C = 'cam-nang-offline-v3';
 
 const F = [
   './',
@@ -8,6 +8,7 @@ const F = [
   './styles.css',
   './app.js',
   './manifest.json',
+  './assets/sa-ban-3d.png',
   './pages/moc-41.html',
   './pages/moc-42.html',
   './pages/moc-44.html',
@@ -40,23 +41,34 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
-  const isLocalPage =
+  const isLocalResource =
     url.origin === self.location.origin &&
-    (url.pathname.endsWith('.html') ||
-     url.pathname.endsWith('.css') ||
-     url.pathname.endsWith('.js'));
+    url.pathname.startsWith('/cam-nang-moc-quoc-gioi-offline/') &&
+    (
+      url.pathname.endsWith('.html') ||
+      url.pathname.endsWith('.css') ||
+      url.pathname.endsWith('.js') ||
+      url.pathname.endsWith('.png') ||
+      url.pathname.endsWith('.jpg') ||
+      url.pathname.endsWith('.jpeg') ||
+      url.pathname.endsWith('.webp') ||
+      url.pathname.endsWith('.svg') ||
+      url.pathname.endsWith('.json')
+    );
 
-  if (!isLocalPage) return;
+  if (!isLocalResource) return;
 
   event.respondWith(
-    fetch(event.request)
-      .then(response => {
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+
+      return fetch(event.request).then(response => {
         if (response.ok) {
           const copy = response.clone();
           caches.open(C).then(cache => cache.put(event.request, copy));
         }
         return response;
-      })
-      .catch(() => caches.match(event.request))
+      });
+    })
   );
 });
