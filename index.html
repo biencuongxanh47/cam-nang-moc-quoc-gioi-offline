@@ -223,6 +223,136 @@
         font-size: 11px;
       }
     }
+
+    /* =========================================
+       ALBUM ẢNH HOẠT ĐỘNG
+       ========================================= */
+
+    .album-section {
+      margin-top: 28px;
+    }
+
+    .album-intro {
+      color: #52665a;
+      line-height: 1.7;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .album-item {
+      display: block;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #edf4ee;
+      border: 1px solid #d7e5d9;
+      border-radius: 12px;
+      cursor: zoom-in;
+      box-shadow: 0 3px 10px rgba(20, 83, 45, 0.08);
+    }
+
+    .album-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+
+    .album-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .album-item:focus-visible {
+      outline: 3px solid #eab308;
+      outline-offset: 3px;
+    }
+
+    .album-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(8, 20, 13, 0.92);
+    }
+
+    .album-lightbox[hidden] {
+      display: none;
+    }
+
+    .album-lightbox-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 1100px;
+      max-height: 100%;
+    }
+
+    .album-lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .album-lightbox-caption {
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .album-lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -8px;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      color: #fff;
+      background: #14532d;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .album-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .album-section {
+        margin-top: 22px;
+      }
+
+      .album-lightbox {
+        padding: 12px;
+      }
+
+      .album-lightbox-image {
+        max-height: 75vh;
+      }
+
+      .album-lightbox-close {
+        top: -8px;
+        right: -4px;
+      }
+    }
   </style>
 </head>
 
@@ -520,6 +650,82 @@
         khi có mạng trước khi chuyển sang chế độ ngoại tuyến.
       </p>
     </section>
+
+    <!-- ALBUM ẢNH HOẠT ĐỘNG -->
+    <section class="section album-section" id="album-anh">
+      <h2>Hình ảnh hoạt động</h2>
+      <p class="album-intro">
+        Một số hình ảnh hoạt động của cán bộ, chiến sĩ và các hoạt động
+        phối hợp trong công tác tuyên truyền, bảo vệ biên giới,
+        phục vụ Nhân dân.
+      </p>
+
+      <div class="album-grid">
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-01.jpg"
+          aria-label="Xem ảnh hoạt động số 1">
+          <img src="assets/album/anh-01.jpg"
+            alt="Hình ảnh hoạt động số 1" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-02_.jpg"
+          aria-label="Xem ảnh hoạt động số 2">
+          <img src="assets/album/anh-02_.jpg"
+            alt="Hình ảnh hoạt động số 2" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-03.jpg"
+          aria-label="Xem ảnh hoạt động số 3">
+          <img src="assets/album/anh-03.jpg"
+            alt="Hình ảnh hoạt động số 3" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-04.jpg"
+          aria-label="Xem ảnh hoạt động số 4">
+          <img src="assets/album/anh-04.jpg"
+            alt="Hình ảnh hoạt động số 4" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-05.jpg"
+          aria-label="Xem ảnh hoạt động số 5">
+          <img src="assets/album/anh-05.jpg"
+            alt="Hình ảnh hoạt động số 5" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-06.jpg"
+          aria-label="Xem ảnh hoạt động số 6">
+          <img src="assets/album/anh-06.jpg"
+            alt="Hình ảnh hoạt động số 6" loading="lazy">
+        </button>
+
+        <button class="album-item" type="button"
+          data-album-image="assets/album/anh-07.jpg"
+          aria-label="Xem ảnh hoạt động số 7">
+          <img src="assets/album/anh-07.jpg"
+            alt="Hình ảnh hoạt động số 7" loading="lazy">
+        </button>
+      </div>
+    </section>
+
+    <!-- CỬA SỔ XEM ẢNH LỚN -->
+    <div class="album-lightbox" id="album-lightbox"
+      role="dialog" aria-modal="true"
+      aria-label="Xem ảnh hoạt động" hidden>
+      <div class="album-lightbox-content">
+        <button class="album-lightbox-close" type="button"
+          aria-label="Đóng ảnh">&times;</button>
+        <img class="album-lightbox-image"
+          id="album-lightbox-image" src=""
+          alt="Ảnh hoạt động đang được phóng to">
+        <p class="album-lightbox-caption"
+          id="album-lightbox-caption"></p>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -591,6 +797,58 @@
           });
       });
     }
+
+    // ALBUM: BẤM ẢNH ĐỂ XEM LỚN
+    (function () {
+      const lightbox = document.getElementById("album-lightbox");
+      const largeImage = document.getElementById("album-lightbox-image");
+      const caption = document.getElementById("album-lightbox-caption");
+      const closeButton = lightbox
+        ? lightbox.querySelector(".album-lightbox-close")
+        : null;
+
+      if (!lightbox || !largeImage || !caption || !closeButton) return;
+
+      let previousFocus = null;
+
+      function closeAlbumImage() {
+        lightbox.hidden = true;
+        largeImage.removeAttribute("src");
+        document.body.style.overflow = "";
+
+        if (previousFocus) previousFocus.focus();
+      }
+
+      document.querySelectorAll("[data-album-image]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const imagePath = button.getAttribute("data-album-image");
+          const thumbnail = button.querySelector("img");
+
+          previousFocus = button;
+          largeImage.src = imagePath;
+          largeImage.alt = thumbnail
+            ? thumbnail.alt
+            : "Ảnh hoạt động";
+          caption.textContent = thumbnail ? thumbnail.alt : "";
+
+          lightbox.hidden = false;
+          document.body.style.overflow = "hidden";
+          closeButton.focus();
+        });
+      });
+
+      closeButton.addEventListener("click", closeAlbumImage);
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeAlbumImage();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.hidden && event.key === "Escape") {
+          closeAlbumImage();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
