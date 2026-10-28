@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'cam-nang-offline-v6';
+const CACHE_NAME = 'cam-nang-offline-v7';
 
 const FILES_TO_CACHE = [
   './',
@@ -8,16 +8,20 @@ const FILES_TO_CACHE = [
   './styles.css',
   './app.js',
   './manifest.json',
+
   './assets/sa-ban-3d.png',
   './assets/icon-192.png',
   './assets/icon-512.png',
   './assets/apple-touch-icon.png',
+  './assets/icon-cot-moc.png.png',
+
   './pages/moc-41.html',
   './pages/moc-42.html',
   './pages/moc-44.html',
   './pages/moc-45.html',
   './pages/moc-46.html',
   './pages/moc-47.html',
+
   './documents/van-ban-hop-nhat-luat-bien-phong-viet-nam.pdf',
   './documents/van-ban-hop-nhat-luat-bien-gioi-quoc-gia.pdf'
 ];
@@ -32,6 +36,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
+      .then(() => self.skipWaiting())
   );
 });
 
