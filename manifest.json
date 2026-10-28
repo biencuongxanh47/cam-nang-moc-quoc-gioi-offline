@@ -1,9 +1,9 @@
 
 {
   "id": "./",
-  "name": "Cẩm nang điện tử khu vực biên giới tỉnh Đắk Lắk",
-  "short_name": "Cẩm nang biên giới",
-  "description": "Học cụ số trực quan về hệ thống mốc quốc giới tỉnh Đắk Lắk",
+  "name": "Mô hình học cụ số mốc quốc giới tỉnh Đắk Lắk",
+  "short_name": "Học cụ số mốc quốc giới",
+  "description": "Mô hình học cụ số trực quan về hệ thống mốc quốc giới tỉnh Đắk Lắk",
   "lang": "vi",
   "start_url": "./index.html",
   "scope": "./",
