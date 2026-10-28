@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'cam-nang-offline-v4';
+const CACHE_NAME = 'cam-nang-offline-v5';
 
 const FILES_TO_CACHE = [
   './',
@@ -20,30 +20,38 @@ const FILES_TO_CACHE = [
   './pages/moc-47.html'
 ];
 
-// Cài phiên bản mới
+// Cho phép nút cập nhật kích hoạt phiên bản mới
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Cài phiên bản mới và lưu các trang để dùng ngoại tuyến
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
-      .then(() => self.skipWaiting())
   );
 });
 
-// Kích hoạt phiên bản mới và dọn bộ nhớ đệm cũ
+// Khi phiên bản mới hoạt động, xóa bộ nhớ đệm cũ
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
         keys
-          .filter(key => key.startsWith('cam-nang-offline-')
-            && key !== CACHE_NAME)
+          .filter(key =>
+            key.startsWith('cam-nang-offline-') &&
+            key !== CACHE_NAME
+          )
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())
   );
 });
 
-// Ưu tiên bản mới từ mạng; mất mạng thì dùng bản đã lưu
+// Có mạng thì lấy nội dung mới; mất mạng thì dùng bản đã lưu
 self.addEventListener('fetch', event => {
   const request = event.request;
 
@@ -85,7 +93,9 @@ self.addEventListener('fetch', event => {
           'Nội dung này chưa được lưu để sử dụng ngoại tuyến.',
           {
             status: 503,
-            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+            headers: {
+              'Content-Type': 'text/plain; charset=utf-8'
+            }
           }
         );
       })
