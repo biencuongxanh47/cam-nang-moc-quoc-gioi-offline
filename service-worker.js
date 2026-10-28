@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'cam-nang-offline-v8';
+const CACHE_NAME = 'cam-nang-offline-v9';
 
 const FILES_TO_CACHE = [
   './',
@@ -14,7 +14,7 @@ const FILES_TO_CACHE = [
   './assets/icon-512.png',
   './assets/apple-touch-icon.png',
   './assets/icon-cot-moc.png.png',
-  './assets/icon-luat-bien-phong.png',
+  './assets/icon-luat-bien-phong.png.png',
 
   './pages/moc-41.html',
   './pages/moc-42.html',
