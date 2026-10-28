@@ -5,19 +5,135 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#14532d">
-  <title>Sa bàn hệ thống mốc quốc giới</title>
+  <title>Mô hình học cụ số mốc quốc giới tỉnh Đắk Lắk</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Học cụ số mốc quốc giới">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
+  <script src="app.js" defer></script>
 
   <style>
+    /* Hai nút thông tin nhanh */
+    .quick-guide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .quick-guide-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 66px;
+      padding: 12px;
+      color: #14532d;
+      background: #fff;
+      border: 1px solid #d7e5d9;
+      border-radius: 12px;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(20, 83, 45, 0.07);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .quick-guide-button:hover {
+      background: #f0fdf4;
+      border-color: #86b99a;
+    }
+
+    .quick-guide-icon {
+      display: flex;
+      flex: 0 0 38px;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: #e8f5eb;
+      border-radius: 10px;
+      font-size: 21px;
+    }
+
+    .quick-guide-text {
+      display: block;
+      min-width: 0;
+    }
+
+    .quick-guide-text strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .quick-guide-text small {
+      display: block;
+      margin-top: 3px;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .guide-panel {
+      margin-top: 14px;
+      padding: 18px;
+      background: #f5faf6;
+      border: 1px solid #d7e5d9;
+      border-radius: 12px;
+    }
+
+    .guide-panel h2 {
+      margin-top: 0;
+    }
+
+    .guide-panel p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .guide-close {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 9px 14px;
+      color: #fff;
+      background: #14532d;
+      border: 0;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .guide-close:hover {
+      background: #166534;
+    }
+
+    /* Sa bàn tương tác hiển thị ngay trên trang chủ */
+    .home-map-section {
+      margin-top: 24px;
+    }
+
+    .home-map-section > p {
+      line-height: 1.7;
+    }
+
     .map-frame {
       position: relative;
       width: 100%;
       overflow: hidden;
       line-height: 0;
+      border: 1px solid #d7e5d9;
+      border-radius: 14px;
+      background: #eef4e9;
+      box-shadow: 0 5px 18px rgba(20, 83, 45, 0.10);
     }
 
-    .map-frame img {
+    .map-frame > img {
       display: block;
       width: 100%;
       height: auto;
@@ -40,7 +156,7 @@
       border: 3px solid transparent;
       border-radius: 50%;
       background: transparent;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
       -webkit-tap-highlight-color: rgba(250, 204, 21, 0.45);
     }
 
@@ -50,25 +166,84 @@
       background: rgba(250, 204, 21, 0.35);
       box-shadow:
         0 0 0 4px rgba(250, 204, 21, 0.25),
-        0 0 22px 10px rgba(250, 204, 21, 0.95);
+        0 0 22px 10px rgba(250, 204, 21, 0.75);
       outline: none;
     }
 
     .map-hotspots a:active {
-      border-color: #ffffff;
+      border-color: #fff;
       background: rgba(34, 197, 94, 0.45);
-      box-shadow: 0 0 24px 12px rgba(34, 197, 94, 0.95);
+      box-shadow: 0 0 24px 12px rgba(34, 197, 94, 0.75);
     }
 
     .map-hotspots a:focus {
       border-color: #facc15;
+    }
+
+    .map-hint {
+      margin-top: 12px;
+      padding: 12px 14px;
+      color: #315b43;
+      background: #edf6ee;
+      border-left: 4px solid #d7b66b;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .map-open-page {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      color: #fff;
+      background: #14532d;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .map-open-page:hover {
+      background: #166534;
+    }
+
+    .quick-guide-button:focus-visible,
+    .guide-close:focus-visible,
+    .map-open-page:focus-visible {
+      outline: 3px solid #eab308;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 420px) {
+      .quick-guide {
+        gap: 8px;
+      }
+
+      .quick-guide-button {
+        gap: 7px;
+        padding: 10px 8px;
+      }
+
+      .quick-guide-icon {
+        flex-basis: 32px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+      }
+
+      .quick-guide-text strong {
+        font-size: 12px;
+      }
+
+      .quick-guide-text small {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
 
 <body>
   <header class="site-header">
-    <div class="brand">CẨM NANG ĐIỆN TỬ KHU VỰC BIÊN GIỚI</div>
+    <div class="brand">MÔ HÌNH HỌC CỤ SỐ MỐC QUỐC GIỚI</div>
     <div class="subtitle">
       Học cụ số trực quan về hệ thống mốc quốc giới tỉnh Đắk Lắk
     </div>
@@ -79,100 +254,375 @@
   </header>
 
   <main class="container">
-    <p class="breadcrumb">
-      <a href="index.html">Trang chủ</a> / Sa bàn
-    </p>
+    <section class="hero">
+      <p>TÌM HIỂU • TRỰC QUAN • HỌC TẬP</p>
+      <h1>Hệ thống mốc quốc giới tỉnh Đắk Lắk</h1>
+      <p>
+        Khám phá vị trí các mốc quốc giới ngay trên sa bàn tương tác,
+        tìm hiểu thông tin từng mốc và tra cứu văn bản pháp luật.
+      </p>
 
-    <h1>Sa bàn hệ thống mốc quốc giới</h1>
+      <div class="quick-guide" aria-label="Thông tin và hướng dẫn">
+        <button
+          class="quick-guide-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="gioi-thieu-panel"
+          data-guide-target="gioi-thieu-panel">
+          <span class="quick-guide-icon" aria-hidden="true">📘</span>
+          <span class="quick-guide-text">
+            <strong>Giới thiệu mô hình</strong>
+            <small>Tìm hiểu mục đích, ý nghĩa</small>
+          </span>
+        </button>
 
-    <p class="muted">
-      Rê chuột vào vùng cột mốc để làm sáng vị trí.
-      Bấm vào cột mốc để mở trang thông tin chi tiết.
-    </p>
-
-    <div class="map-frame">
-      <img
-        src="assets/sa-ban-3d.png"
-        alt="Sa bàn hệ thống mốc quốc giới"
-      >
-
-      <div class="map-hotspots">
-        <a href="pages/moc-41.html"
-           aria-label="Mở thông tin mốc 41"
-           title="Mốc 41"
-           style="left:9%;top:4%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-42.html"
-           aria-label="Mở thông tin mốc 42"
-           title="Mốc 42"
-           style="left:9%;top:23%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-44.html"
-           aria-label="Mở thông tin mốc 44"
-           title="Mốc 44"
-           style="left:10%;top:42%;width:11%;height:17%"></a>
-
-        <a href="pages/moc-45.html"
-           aria-label="Mở thông tin mốc 45"
-           title="Mốc 45"
-           style="left:18%;top:59%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-46.html"
-           aria-label="Mở thông tin mốc 46"
-           title="Mốc 46"
-           style="left:23%;top:72%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-47.html"
-           aria-label="Mở thông tin mốc 47"
-           title="Mốc 47"
-           style="left:28%;top:84%;width:10%;height:15%"></a>
+        <button
+          class="quick-guide-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="huong-dan-panel"
+          data-guide-target="huong-dan-panel">
+          <span class="quick-guide-icon" aria-hidden="true">🧭</span>
+          <span class="quick-guide-text">
+            <strong>Hướng dẫn sử dụng</strong>
+            <small>Cách khám phá các chức năng</small>
+          </span>
+        </button>
       </div>
-    </div>
+    </section>
 
-    <div class="marker-grid">
-      <a class="marker-card" href="pages/moc-41.html">
-        <span class="marker-number">41</span>
-        <strong>Mốc số 41</strong>
-      </a>
+    <section
+      class="guide-panel"
+      id="gioi-thieu-panel"
+      aria-labelledby="gioi-thieu-title"
+      hidden>
+      <h2 id="gioi-thieu-title">Giới thiệu mô hình</h2>
+      <p>
+        Mô hình học cụ số mốc quốc giới tỉnh Đắk Lắk phục vụ trực quan hóa,
+        tuyên truyền và học tập về hệ thống mốc quốc giới. Thông qua sa bàn
+        tương tác, các trang thông tin và tài liệu pháp luật, người dùng có
+        thể tiếp cận nội dung theo cách trực quan, thuận tiện.
+      </p>
+      <p>
+        Nội dung được xây dựng phục vụ công tác tuyên truyền, giáo dục và
+        tìm hiểu kiến thức về biên giới quốc gia; chỉ sử dụng thông tin,
+        hình ảnh và tư liệu đã được phép phổ biến.
+      </p>
+      <button class="guide-close" type="button" data-guide-close>
+        Thu gọn
+      </button>
+    </section>
 
-      <a class="marker-card" href="pages/moc-42.html">
-        <span class="marker-number">42</span>
-        <strong>Mốc số 42</strong>
-      </a>
+    <section
+      class="guide-panel"
+      id="huong-dan-panel"
+      aria-labelledby="huong-dan-title"
+      hidden>
+      <h2 id="huong-dan-title">Hướng dẫn sử dụng mô hình</h2>
 
-      <a class="marker-card" href="pages/moc-44.html">
-        <span class="marker-number">44</span>
-        <strong>Mốc số 44</strong>
-      </a>
+      <p>
+        <strong>1. Khám phá sa bàn:</strong>
+        Bấm vào vùng vị trí cột mốc trên bản đồ để mở trang thông tin chi tiết.
+        Nếu sử dụng điện thoại, chạm trực tiếp vào vị trí mốc.
+      </p>
 
-      <a class="marker-card" href="pages/moc-45.html">
-        <span class="marker-number">45</span>
-        <strong>Mốc số 45</strong>
-      </a>
+      <p>
+        <strong>2. Tìm hiểu từng mốc:</strong>
+        Có thể chọn các thẻ mốc ở bên dưới sa bàn để truy cập nhanh thông tin
+        mốc 41, 42, 44, 45, 46 hoặc 47.
+      </p>
 
-      <a class="marker-card" href="pages/moc-46.html">
-        <span class="marker-number">46</span>
-        <strong>Mốc số 46</strong>
-      </a>
+      <p>
+        <strong>3. Tra cứu văn bản pháp luật:</strong>
+        Chọn “Đọc văn bản” để mở PDF hoặc “Tải PDF” để lưu tài liệu.
+      </p>
 
-      <a class="marker-card" href="pages/moc-47.html">
-        <span class="marker-number">47</span>
-        <strong>Mốc số 47</strong>
+      <p>
+        <strong>4. Sử dụng trên điện thoại:</strong>
+        Mở mô hình bằng trình duyệt. Nếu thiết bị hỗ trợ, có thể thêm trang
+        vào màn hình chính để truy cập thuận tiện hơn.
+      </p>
+
+      <p>
+        <strong>5. Sử dụng khi không có Internet:</strong>
+        Mở mô hình và các tài liệu cần thiết khi có mạng trước khi sử dụng
+        ngoại tuyến. Một số nội dung trực tuyến hoặc liên kết bên ngoài
+        có thể không hoạt động khi mất mạng.
+      </p>
+
+      <button class="guide-close" type="button" data-guide-close>
+        Thu gọn
+      </button>
+    </section>
+
+    <!-- SA BÀN TƯƠNG TÁC TRÊN TRANG CHỦ -->
+    <section class="section home-map-section">
+      <h2>Sa bàn hệ thống mốc quốc giới</h2>
+      <p>
+        Chọn trực tiếp vị trí cột mốc trên sa bàn để xem thông tin chi tiết.
+        Trên điện thoại, hãy chạm vào vùng cột mốc tương ứng.
+      </p>
+
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn 3D hệ thống mốc quốc giới tỉnh Đắk Lắk"
+          fetchpriority="high">
+
+        <div class="map-hotspots">
+          <a
+            href="pages/moc-41.html"
+            aria-label="Mở thông tin mốc quốc giới số 41"
+            title="Mốc quốc giới số 41"
+            style="left:9%;top:4%;width:10%;height:17%">
+          </a>
+
+          <a
+            href="pages/moc-42.html"
+            aria-label="Mở thông tin mốc quốc giới số 42"
+            title="Mốc quốc giới số 42"
+            style="left:9%;top:23%;width:10%;height:17%">
+          </a>
+
+          <a
+            href="pages/moc-44.html"
+            aria-label="Mở thông tin mốc quốc giới số 44"
+            title="Mốc quốc giới số 44"
+            style="left:10%;top:42%;width:11%;height:17%">
+          </a>
+
+          <a
+            href="pages/moc-45.html"
+            aria-label="Mở thông tin mốc quốc giới số 45"
+            title="Mốc quốc giới số 45"
+            style="left:18%;top:59%;width:10%;height:17%">
+          </a>
+
+          <a
+            href="pages/moc-46.html"
+            aria-label="Mở thông tin mốc quốc giới số 46"
+            title="Mốc quốc giới số 46"
+            style="left:23%;top:72%;width:10%;height:17%">
+          </a>
+
+          <a
+            href="pages/moc-47.html"
+            aria-label="Mở thông tin mốc quốc giới số 47"
+            title="Mốc quốc giới số 47"
+            style="left:28%;top:84%;width:10%;height:15%">
+          </a>
+        </div>
+      </div>
+
+      <div class="map-hint">
+        <strong>Cách sử dụng:</strong>
+        Chạm vào vùng cột mốc trên sa bàn hoặc chọn số mốc bên dưới.
+        Các vùng tương tác được giữ theo tọa độ của sa bàn hiện tại.
+      </div>
+
+      <a class="map-open-page" href="saban.html">
+        Mở trang sa bàn riêng
       </a>
-    </div>
+    </section>
+
+    <!-- DANH SÁCH MỐC QUỐC GIỚI -->
+    <section class="section">
+      <h2>Hệ thống mốc quốc giới</h2>
+
+      <div class="marker-grid">
+        <a class="marker-card" href="pages/moc-41.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 41</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+
+        <a class="marker-card" href="pages/moc-42.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 42</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+
+        <a class="marker-card" href="pages/moc-44.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 44</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+
+        <a class="marker-card" href="pages/moc-45.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 45</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+
+        <a class="marker-card" href="pages/moc-46.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 46</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+
+        <a class="marker-card" href="pages/moc-47.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <span>
+            <strong>Mốc quốc giới số 47</strong>
+            <small>Xem nội dung mốc</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- VĂN BẢN PHÁP LUẬT -->
+    <section class="section">
+      <h2>Văn bản pháp luật</h2>
+      <p>
+        Tra cứu văn bản phục vụ tuyên truyền, học tập và tìm hiểu
+        các quy định về biên phòng, biên giới quốc gia.
+      </p>
+
+      <div class="marker-grid">
+        <article class="marker-card">
+          <span class="law-icon">
+            <img
+              src="assets/icon-luat-bien-phong.png.png"
+              alt="Bìa Luật Biên phòng Việt Nam">
+          </span>
+          <span>
+            <strong>Văn bản hợp nhất Luật Biên phòng Việt Nam</strong>
+            <small>Văn bản hợp nhất năm 2025</small>
+            <small>
+              <a href="documents/van-ban-hop-nhat-luat-bien-phong-viet-nam.pdf">
+                Đọc văn bản
+              </a>
+            </small>
+            <small>
+              <a href="documents/van-ban-hop-nhat-luat-bien-phong-viet-nam.pdf" download>
+                Tải PDF
+              </a>
+            </small>
+          </span>
+        </article>
+
+        <article class="marker-card">
+          <span class="law-icon">
+            <img
+              src="assets/icon-luat-bien-gioi-quoc-gia.png"
+              alt="Bìa Luật Biên giới quốc gia">
+          </span>
+          <span>
+            <strong>Văn bản hợp nhất Luật Biên giới quốc gia</strong>
+            <small>Văn bản hợp nhất năm 2021</small>
+            <small>
+              <a href="documents/van-ban-hop-nhat-luat-bien-gioi-quoc-gia.pdf">
+                Đọc văn bản
+              </a>
+            </small>
+            <small>
+              <a href="documents/van-ban-hop-nhat-luat-bien-gioi-quoc-gia.pdf" download>
+                Tải PDF
+              </a>
+            </small>
+          </span>
+        </article>
+      </div>
+
+      <p class="note">
+        Để sử dụng tài liệu khi không có Internet, hãy mở từng văn bản
+        khi có mạng trước khi chuyển sang chế độ ngoại tuyến.
+      </p>
+    </section>
+
+    <!-- ALBUM ẢNH SẼ ĐƯỢC BỔ SUNG SAU -->
+
   </main>
 
   <footer class="site-footer">
-    Cẩm nang điện tử khu vực biên giới tỉnh Đắk Lắk
+    Mô hình học cụ số mốc quốc giới tỉnh Đắk Lắk
   </footer>
 
   <script>
+    (function () {
+      const guideButtons = document.querySelectorAll("[data-guide-target]");
+      const guidePanels = document.querySelectorAll(".guide-panel");
+
+      function closeAllGuides() {
+        guidePanels.forEach(function (panel) {
+          panel.hidden = true;
+        });
+
+        guideButtons.forEach(function (button) {
+          button.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      guideButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          const targetId = button.getAttribute("data-guide-target");
+          const targetPanel = document.getElementById(targetId);
+          const isAlreadyOpen = targetPanel && !targetPanel.hidden;
+
+          closeAllGuides();
+
+          if (targetPanel && !isAlreadyOpen) {
+            targetPanel.hidden = false;
+            button.setAttribute("aria-expanded", "true");
+
+            targetPanel.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest"
+            });
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-guide-close]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const panel = button.closest(".guide-panel");
+
+          if (panel) {
+            panel.hidden = true;
+
+            const relatedButton = document.querySelector(
+              '[data-guide-target="' + panel.id + '"]'
+            );
+
+            if (relatedButton) {
+              relatedButton.setAttribute("aria-expanded", "false");
+              relatedButton.focus();
+            }
+          }
+        });
+      });
+    })();
+
     if ("serviceWorker" in navigator &&
         location.protocol.startsWith("http")) {
-      addEventListener("load", () => {
+      window.addEventListener("load", function () {
         navigator.serviceWorker
           .register("./service-worker.js")
-          .catch(() => {});
+          .catch(function (error) {
+            console.error("Không thể đăng ký Service Worker:", error);
+          });
       });
     }
   </script>
