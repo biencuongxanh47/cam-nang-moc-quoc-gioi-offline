@@ -1,7 +1,7 @@
 
-const C = 'cam-nang-offline-v3';
+const CACHE_NAME = 'cam-nang-offline-v4';
 
-const F = [
+const FILES_TO_CACHE = [
   './',
   './index.html',
   './saban.html',
@@ -9,6 +9,9 @@ const F = [
   './app.js',
   './manifest.json',
   './assets/sa-ban-3d.png',
+  './assets/icon-192.png',
+  './assets/icon-512.png',
+  './assets/apple-touch-icon.png',
   './pages/moc-41.html',
   './pages/moc-42.html',
   './pages/moc-44.html',
@@ -17,58 +20,74 @@ const F = [
   './pages/moc-47.html'
 ];
 
+// Cài phiên bản mới
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(C)
-      .then(cache => cache.addAll(F))
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(FILES_TO_CACHE))
       .then(() => self.skipWaiting())
   );
 });
 
+// Kích hoạt phiên bản mới và dọn bộ nhớ đệm cũ
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
         keys
-          .filter(key => key !== C)
+          .filter(key => key.startsWith('cam-nang-offline-')
+            && key !== CACHE_NAME)
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())
   );
 });
 
+// Ưu tiên bản mới từ mạng; mất mạng thì dùng bản đã lưu
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
+  const request = event.request;
 
-  const url = new URL(event.request.url);
+  if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
+
   const isLocalResource =
     url.origin === self.location.origin &&
     url.pathname.startsWith('/cam-nang-moc-quoc-gioi-offline/') &&
-    (
-      url.pathname.endsWith('.html') ||
-      url.pathname.endsWith('.css') ||
-      url.pathname.endsWith('.js') ||
-      url.pathname.endsWith('.png') ||
-      url.pathname.endsWith('.jpg') ||
-      url.pathname.endsWith('.jpeg') ||
-      url.pathname.endsWith('.webp') ||
-      url.pathname.endsWith('.svg') ||
-      url.pathname.endsWith('.json')
-    );
+    !url.pathname.endsWith('/service-worker.js');
 
   if (!isLocalResource) return;
 
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-
-      return fetch(event.request).then(response => {
-        if (response.ok) {
+    fetch(request)
+      .then(response => {
+        if (response && response.ok) {
           const copy = response.clone();
-          caches.open(C).then(cache => cache.put(event.request, copy));
+
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, copy))
+            .catch(() => {});
         }
+
         return response;
-      });
-    })
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
+
+        if (cached) return cached;
+
+        if (request.mode === 'navigate') {
+          const home = await caches.match('./index.html');
+          if (home) return home;
+        }
+
+        return new Response(
+          'Nội dung này chưa được lưu để sử dụng ngoại tuyến.',
+          {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+          }
+        );
+      })
   );
 });
