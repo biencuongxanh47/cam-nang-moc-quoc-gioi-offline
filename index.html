@@ -41,7 +41,6 @@
       font: inherit;
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(20, 83, 45, 0.07);
-      transition: background 0.2s, border-color 0.2s;
     }
 
     .quick-guide-button:hover {
@@ -92,13 +91,9 @@
       margin-top: 0;
     }
 
-    .guide-panel p:last-child {
-      margin-bottom: 0;
-    }
-
     .guide-close {
       display: inline-block;
-      margin-top: 8px;
+      margin-top: 12px;
       padding: 9px 14px;
       color: #fff;
       background: #14532d;
@@ -112,8 +107,93 @@
       background: #166534;
     }
 
+    .home-map-section {
+      margin-top: 24px;
+    }
+
+    .home-map-section > p {
+      line-height: 1.7;
+    }
+
+    .map-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      border: 1px solid #d7e5d9;
+      border-radius: 14px;
+      background: #eef4e9;
+      box-shadow: 0 5px 18px rgba(20, 83, 45, 0.10);
+    }
+
+    .map-frame > img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .map-hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .map-hotspots a {
+      position: absolute;
+      display: block;
+      z-index: 11;
+      box-sizing: border-box;
+      pointer-events: auto;
+      cursor: pointer;
+      border: 3px solid transparent;
+      border-radius: 50%;
+      background: transparent;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: rgba(250, 204, 21, 0.45);
+    }
+
+    .map-hotspots a:hover,
+    .map-hotspots a:focus-visible {
+      border-color: #facc15;
+      background: rgba(250, 204, 21, 0.35);
+      box-shadow:
+        0 0 0 4px rgba(250, 204, 21, 0.25),
+        0 0 22px 10px rgba(250, 204, 21, 0.75);
+      outline: none;
+    }
+
+    .map-hotspots a:active {
+      border-color: #fff;
+      background: rgba(34, 197, 94, 0.45);
+      box-shadow: 0 0 24px 12px rgba(34, 197, 94, 0.75);
+    }
+
+    .map-hint {
+      margin-top: 12px;
+      padding: 12px 14px;
+      color: #315b43;
+      background: #edf6ee;
+      border-left: 4px solid #d7b66b;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .map-open-page {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      color: #fff;
+      background: #14532d;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
     .quick-guide-button:focus-visible,
-    .guide-close:focus-visible {
+    .guide-close:focus-visible,
+    .map-open-page:focus-visible {
       outline: 3px solid #eab308;
       outline-offset: 3px;
     }
@@ -163,12 +243,9 @@
       <p>TÌM HIỂU • TRỰC QUAN • HỌC TẬP</p>
       <h1>Hệ thống mốc quốc giới tỉnh Đắk Lắk</h1>
       <p>
-        Khám phá thông tin các mốc quốc giới, quan sát vị trí trên sa bàn 3D
-        và tra cứu văn bản pháp luật phục vụ tuyên truyền, học tập.
+        Khám phá vị trí các mốc quốc giới ngay trên sa bàn tương tác,
+        tìm hiểu thông tin từng mốc và tra cứu văn bản pháp luật.
       </p>
-      <a class="primary-button" href="saban.html">
-        Mở sa bàn hệ thống mốc
-      </a>
 
       <div class="quick-guide" aria-label="Thông tin và hướng dẫn">
         <button
@@ -207,9 +284,9 @@
       <h2 id="gioi-thieu-title">Giới thiệu mô hình</h2>
       <p>
         Mô hình học cụ số mốc quốc giới tỉnh Đắk Lắk phục vụ trực quan hóa,
-        tuyên truyền và học tập về hệ thống mốc quốc giới. Thông qua các
-        trang thông tin, sa bàn 3D và tài liệu pháp luật, người dùng có thể
-        tiếp cận nội dung theo cách trực quan, thuận tiện.
+        tuyên truyền và học tập về hệ thống mốc quốc giới. Thông qua sa bàn
+        tương tác, các trang thông tin và tài liệu pháp luật, người dùng có
+        thể tiếp cận nội dung theo cách trực quan, thuận tiện.
       </p>
       <p>
         Nội dung được xây dựng phục vụ công tác tuyên truyền, giáo dục và
@@ -229,33 +306,94 @@
       <h2 id="huong-dan-title">Hướng dẫn sử dụng mô hình</h2>
 
       <p>
-        <strong>1. Tìm hiểu mốc quốc giới:</strong>
-        Chọn số mốc trên trang chủ hoặc mở “Sa bàn 3D” để lựa chọn vị trí
-        mốc và xem thông tin chi tiết.
+        <strong>1. Khám phá sa bàn:</strong>
+        Bấm vào vùng vị trí cột mốc trên bản đồ để mở trang thông tin chi tiết.
+        Trên điện thoại, chạm vào vùng mốc tương ứng.
       </p>
 
       <p>
-        <strong>2. Tra cứu văn bản pháp luật:</strong>
-        Chọn văn bản cần đọc trong mục “Văn bản pháp luật”. Nhấn “Đọc văn bản”
-        để mở PDF hoặc “Tải PDF” để lưu tài liệu.
+        <strong>2. Tìm hiểu từng mốc:</strong>
+        Có thể chọn các thẻ mốc bên dưới sa bàn để truy cập nhanh thông tin
+        mốc 41, 42, 44, 45, 46 hoặc 47.
       </p>
 
       <p>
-        <strong>3. Sử dụng trên điện thoại:</strong>
+        <strong>3. Tra cứu văn bản pháp luật:</strong>
+        Chọn “Đọc văn bản” để mở PDF hoặc “Tải PDF” để lưu tài liệu.
+      </p>
+
+      <p>
+        <strong>4. Sử dụng trên điện thoại:</strong>
         Mở mô hình bằng trình duyệt. Nếu thiết bị hỗ trợ, có thể thêm trang
         vào màn hình chính để truy cập thuận tiện hơn.
       </p>
 
       <p>
-        <strong>4. Sử dụng khi không có Internet:</strong>
-        Mở mô hình và các tài liệu cần thiết khi có mạng trước khi chuyển
-        sang chế độ ngoại tuyến. Một số nội dung trực tuyến hoặc liên kết
-        bên ngoài có thể không hoạt động khi mất mạng.
+        <strong>5. Sử dụng khi không có Internet:</strong>
+        Mở mô hình và các tài liệu cần thiết khi có mạng trước khi sử dụng
+        ngoại tuyến. Một số nội dung trực tuyến hoặc liên kết bên ngoài
+        có thể không hoạt động khi mất mạng.
       </p>
 
       <button class="guide-close" type="button" data-guide-close>
         Thu gọn
       </button>
+    </section>
+
+    <section class="section home-map-section">
+      <h2>Sa bàn hệ thống mốc quốc giới</h2>
+      <p>
+        Chọn trực tiếp vị trí cột mốc trên sa bàn để xem thông tin chi tiết.
+        Trên điện thoại, hãy chạm vào vùng cột mốc tương ứng.
+      </p>
+
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn 3D hệ thống mốc quốc giới tỉnh Đắk Lắk"
+          fetchpriority="high">
+
+        <div class="map-hotspots">
+          <a href="pages/moc-41.html"
+             aria-label="Mở thông tin mốc quốc giới số 41"
+             title="Mốc quốc giới số 41"
+             style="left:9%;top:4%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-42.html"
+             aria-label="Mở thông tin mốc quốc giới số 42"
+             title="Mốc quốc giới số 42"
+             style="left:9%;top:23%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-44.html"
+             aria-label="Mở thông tin mốc quốc giới số 44"
+             title="Mốc quốc giới số 44"
+             style="left:10%;top:42%;width:11%;height:17%"></a>
+
+          <a href="pages/moc-45.html"
+             aria-label="Mở thông tin mốc quốc giới số 45"
+             title="Mốc quốc giới số 45"
+             style="left:18%;top:59%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-46.html"
+             aria-label="Mở thông tin mốc quốc giới số 46"
+             title="Mốc quốc giới số 46"
+             style="left:23%;top:72%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-47.html"
+             aria-label="Mở thông tin mốc quốc giới số 47"
+             title="Mốc quốc giới số 47"
+             style="left:28%;top:84%;width:10%;height:15%"></a>
+        </div>
+      </div>
+
+      <div class="map-hint">
+        <strong>Cách sử dụng:</strong>
+        Chạm vào vùng cột mốc trên sa bàn hoặc chọn số mốc bên dưới.
+      </div>
+
+      <a class="map-open-page" href="saban.html">
+        Mở trang sa bàn riêng
+      </a>
     </section>
 
     <section class="section">
