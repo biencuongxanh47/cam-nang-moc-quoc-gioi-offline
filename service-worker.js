@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'cam-nang-offline-v5';
+const CACHE_NAME = 'cam-nang-offline-v6';
 
 const FILES_TO_CACHE = [
   './',
@@ -17,17 +17,17 @@ const FILES_TO_CACHE = [
   './pages/moc-44.html',
   './pages/moc-45.html',
   './pages/moc-46.html',
-  './pages/moc-47.html'
+  './pages/moc-47.html',
+  './documents/van-ban-hop-nhat-luat-bien-phong-viet-nam.pdf',
+  './documents/van-ban-hop-nhat-luat-bien-gioi-quoc-gia.pdf'
 ];
 
-// Cho phép nút cập nhật kích hoạt phiên bản mới
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
-// Cài phiên bản mới và lưu các trang để dùng ngoại tuyến
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -35,7 +35,6 @@ self.addEventListener('install', event => {
   );
 });
 
-// Khi phiên bản mới hoạt động, xóa bộ nhớ đệm cũ
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -51,7 +50,6 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Có mạng thì lấy nội dung mới; mất mạng thì dùng bản đã lưu
 self.addEventListener('fetch', event => {
   const request = event.request;
 
@@ -90,7 +88,7 @@ self.addEventListener('fetch', event => {
         }
 
         return new Response(
-          'Nội dung này chưa được lưu để sử dụng ngoại tuyến.',
+          'Tài liệu chưa được lưu để sử dụng ngoại tuyến.',
           {
             status: 503,
             headers: {
