@@ -11,52 +11,42 @@ document.addEventListener("DOMContentLoaded", function () {
     updateNoticeShown = true;
     waitingWorker = worker;
 
-    let banner = document.getElementById("update-notice");
+    const banner = document.createElement("div");
+    banner.id = "update-notice";
+    banner.setAttribute("role", "status");
 
-    if (!banner) {
-      banner = document.createElement("div");
-      banner.id = "update-notice";
+    banner.style.cssText =
+      "position:fixed;left:12px;right:12px;bottom:20px;" +
+      "z-index:999999;padding:16px;background:#14532d;color:#fff;" +
+      "border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.3);" +
+      "font:16px/1.5 Arial,sans-serif";
 
-      banner.style.cssText = [
-        "position:fixed",
-        "left:12px",
-        "right:12px",
-        "bottom:20px",
-        "z-index:999999",
-        "padding:16px",
-        "background:#14532d",
-        "color:#ffffff",
-        "border-radius:12px",
-        "box-shadow:0 4px 18px rgba(0,0,0,.3)",
-        "font:16px/1.5 Arial,sans-serif"
-      ].join(";");
+    const message = document.createElement("div");
+    message.textContent =
+      "Cẩm nang đã có phiên bản mới. Nhấn nút bên dưới để cập nhật.";
 
-      const message = document.createElement("div");
-      message.textContent =
-        "Cẩm nang đã có phiên bản mới. Nhấn nút bên dưới để cập nhật.";
+    const button = document.createElement("button");
+    button.textContent = "Cập nhật ngay";
+    button.style.cssText =
+      "margin-top:12px;padding:11px 18px;border:0;border-radius:8px;" +
+      "background:#fff;color:#14532d;font-weight:bold;font-size:16px";
 
-      const button = document.createElement("button");
-      button.textContent = "Cập nhật ngay";
-      button.style.cssText =
-        "margin-top:12px;padding:11px 18px;border:0;" +
-        "border-radius:8px;background:#ffffff;color:#14532d;" +
-        "font-weight:bold;font-size:16px;cursor:pointer";
+    button.addEventListener("click", function () {
+      button.disabled = true;
+      button.textContent = "Đang cập nhật...";
 
-      button.addEventListener("click", function () {
-        button.disabled = true;
-        button.textContent = "Đang cập nhật...";
+      sessionStorage.setItem("cam-nang-update-approved", "yes");
 
-        if (waitingWorker) {
-          waitingWorker.postMessage({ type: "SKIP_WAITING" });
-        } else {
-          window.location.reload();
-        }
-      });
+      if (waitingWorker) {
+        waitingWorker.postMessage({ type: "SKIP_WAITING" });
+      } else {
+        window.location.reload();
+      }
+    });
 
-      banner.appendChild(message);
-      banner.appendChild(button);
-      document.body.appendChild(banner);
-    }
+    banner.appendChild(message);
+    banner.appendChild(button);
+    document.body.appendChild(banner);
   }
 
   navigator.serviceWorker.register("./service-worker.js")
@@ -68,10 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       checkForUpdate();
-
       window.addEventListener("online", checkForUpdate);
 
-      // Kiểm tra bản mới đang chờ kích hoạt.
       if (registration.waiting && navigator.serviceWorker.controller) {
         showUpdateNotice(registration.waiting);
       }
@@ -94,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Lỗi đăng ký Service Worker:", error);
     });
 
-  // Chỉ tải lại trang khi người dùng đã chọn cập nhật.
   navigator.serviceWorker.addEventListener("controllerchange", function () {
     if (sessionStorage.getItem("cam-nang-update-approved") === "yes") {
       sessionStorage.removeItem("cam-nang-update-approved");
