@@ -331,7 +331,6 @@
     }
 
     @media (max-width: 600px) {
-      /* ƯU TIÊN HIỂN THỊ SA BÀN TRÊN ĐIỆN THOẠI */
       .home-map-section {
         margin-top: 12px;
       }
@@ -363,6 +362,77 @@
       .album-lightbox-close {
         top: -8px;
         right: -4px;
+      }
+    }
+
+    /* TỐI ƯU TRANG CHỦ CHO ĐIỆN THOẠI */
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 16px 14px 14px !important;
+      }
+
+      .brand {
+        font-size: clamp(19px, 5.2vw, 24px) !important;
+        line-height: 1.18 !important;
+        margin-bottom: 6px !important;
+      }
+
+      .subtitle {
+        margin-top: 4px !important;
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+      }
+
+      .nav {
+        margin-top: 10px !important;
+        gap: 8px !important;
+      }
+
+      .nav a {
+        padding: 7px 12px !important;
+        font-size: 13px !important;
+      }
+
+      .container {
+        padding: 10px 12px 20px !important;
+      }
+
+      .home-map-section {
+        margin-top: 4px !important;
+        padding-top: 12px !important;
+      }
+
+      .home-map-section h2 {
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+        font-size: 20px !important;
+        line-height: 1.25 !important;
+      }
+
+      .home-map-section > p {
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+      }
+
+      .map-frame {
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 10px !important;
+      }
+
+      .map-hint {
+        margin-top: 8px !important;
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+
+      .map-open-page {
+        margin-top: 8px !important;
+        padding: 8px 12px !important;
+        font-size: 13px !important;
       }
     }
   </style>
@@ -850,3 +920,4 @@
   </script>
 </body>
 </html>
+
