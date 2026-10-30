@@ -473,6 +473,138 @@
         margin-top: 10px !important;
       }
     }
+
+    /* PHÓNG TO SA BÀN NGAY TRÊN TRANG CHỦ */
+    .home-map-zoom-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 46px;
+      margin-top: 12px;
+      padding: 11px 16px;
+      color: #fff;
+      background: #14532d;
+      border: 0;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .home-map-zoom-button:hover {
+      background: #166534;
+    }
+
+    .home-map-zoom-button:focus-visible {
+      outline: 3px solid #eab308;
+      outline-offset: 3px;
+    }
+
+    .home-map-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(5, 18, 11, .96);
+    }
+
+    .home-map-lightbox.active {
+      display: flex;
+    }
+
+    .home-map-lightbox-content {
+      position: relative;
+      width: 100%;
+      max-width: 1500px;
+    }
+
+    .home-map-lightbox .map-frame {
+      width: 100%;
+      max-height: 88vh;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 10px;
+    }
+
+    .home-map-lightbox .map-frame > img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+
+    .home-map-lightbox-close {
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      color: #fff;
+      background: #14532d;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .home-map-lightbox-caption {
+      margin: 12px 0 0;
+      color: #fff;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    body.home-map-lightbox-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .home-map-zoom-button {
+        min-height: 43px;
+        margin-top: 9px;
+        font-size: 13px;
+      }
+
+      .home-map-lightbox {
+        padding: 9px;
+      }
+
+      .home-map-lightbox .map-frame,
+      .home-map-lightbox .map-frame > img {
+        max-height: 82vh;
+      }
+
+      .home-map-lightbox-close {
+        top: -10px;
+        right: -3px;
+        width: 39px;
+        height: 39px;
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+      .home-map-lightbox {
+        padding: 7px;
+      }
+
+      .home-map-lightbox .map-frame,
+      .home-map-lightbox .map-frame > img {
+        max-height: 88vh;
+      }
+    }
   </style>
 </head>
 
@@ -529,6 +661,15 @@
              style="left:28%;top:84%;width:10%;height:15%"></a>
         </div>
       </div>
+
+      <button
+        class="home-map-zoom-button"
+        type="button"
+        id="openHomeMapZoom"
+        aria-label="Phóng to sa bàn toàn màn hình">
+        <span aria-hidden="true">⛶</span>
+        Phóng to sa bàn
+      </button>
 
       <div class="map-hint">
         <strong>Cách sử dụng:</strong>
@@ -829,6 +970,66 @@
     </div>
   </main>
 
+  <!-- CỬA SỔ PHÓNG TO SA BÀN TRÊN TRANG CHỦ -->
+  <div
+    class="home-map-lightbox"
+    id="homeMapLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Sa bàn hệ thống mốc quốc giới phóng to"
+    aria-hidden="true">
+    <div class="home-map-lightbox-content">
+      <button
+        class="home-map-lightbox-close"
+        type="button"
+        id="closeHomeMapZoom"
+        aria-label="Đóng sa bàn phóng to">&times;</button>
+
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn 3D hệ thống mốc quốc giới tỉnh Đắk Lắk">
+
+        <div class="map-hotspots">
+          <a href="pages/moc-41.html"
+             aria-label="Mở thông tin mốc quốc giới số 41"
+             title="Mốc quốc giới số 41"
+             style="left:9%;top:4%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-42.html"
+             aria-label="Mở thông tin mốc quốc giới số 42"
+             title="Mốc quốc giới số 42"
+             style="left:9%;top:23%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-44.html"
+             aria-label="Mở thông tin mốc quốc giới số 44"
+             title="Mốc quốc giới số 44"
+             style="left:10%;top:42%;width:11%;height:17%"></a>
+
+          <a href="pages/moc-45.html"
+             aria-label="Mở thông tin mốc quốc giới số 45"
+             title="Mốc quốc giới số 45"
+             style="left:18%;top:59%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-46.html"
+             aria-label="Mở thông tin mốc quốc giới số 46"
+             title="Mốc quốc giới số 46"
+             style="left:23%;top:72%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-47.html"
+             aria-label="Mở thông tin mốc quốc giới số 47"
+             title="Mốc quốc giới số 47"
+             style="left:28%;top:84%;width:10%;height:15%"></a>
+        </div>
+      </div>
+
+      <p class="home-map-lightbox-caption">
+        Chạm vào vị trí cột mốc để mở trang thông tin chi tiết.
+        Xoay ngang điện thoại để quan sát sa bàn rõ hơn.
+      </p>
+    </div>
+  </div>
+
   <footer class="site-footer">
     Bản quyền thuộc Bộ đội Biên phòng tỉnh Đắk Lắk
   </footer>
@@ -898,6 +1099,42 @@
           });
       });
     }
+
+    // PHÓNG TO SA BÀN NGAY TRÊN TRANG CHỦ
+    (function () {
+      const lightbox = document.getElementById("homeMapLightbox");
+      const openButton = document.getElementById("openHomeMapZoom");
+      const closeButton = document.getElementById("closeHomeMapZoom");
+
+      if (!lightbox || !openButton || !closeButton) return;
+
+      function openMap() {
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("home-map-lightbox-open");
+        closeButton.focus();
+      }
+
+      function closeMap() {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("home-map-lightbox-open");
+        openButton.focus();
+      }
+
+      openButton.addEventListener("click", openMap);
+      closeButton.addEventListener("click", closeMap);
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeMap();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("active")) {
+          closeMap();
+        }
+      });
+    })();
 
     // ALBUM: BẤM ẢNH ĐỂ XEM LỚN
     (function () {
