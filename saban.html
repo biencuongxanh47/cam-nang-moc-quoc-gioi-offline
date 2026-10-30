@@ -10,11 +10,86 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
+    /* ==============================
+       KHUNG TRANG SA BÀN
+    ============================== */
+
+    .map-page-intro {
+      margin: 18px 0 22px;
+    }
+
+    .map-page-intro h1 {
+      margin-bottom: 12px;
+      color: #123d2b;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.25;
+    }
+
+    .map-page-intro p {
+      margin: 0;
+      color: #52645a;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .map-main-card {
+      position: relative;
+      margin: 18px 0 28px;
+      padding: 22px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid #dce8df;
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(20, 83, 45, 0.09);
+    }
+
+    .map-card-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .map-card-heading h2 {
+      margin: 0;
+      color: #14532d;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .map-card-heading h2::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 25px;
+      margin-right: 11px;
+      vertical-align: -5px;
+      background: #d9b96e;
+      border-radius: 5px;
+    }
+
+    .map-card-description {
+      margin: 0 0 18px;
+      color: #59685e;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ==============================
+       SA BÀN VÀ CÁC VÙNG TƯƠNG TÁC
+    ============================== */
+
     .map-frame {
       position: relative;
       width: 100%;
       overflow: hidden;
       line-height: 0;
+      background: #e9efe5;
+      border: 1px solid #dce8df;
+      border-radius: 16px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
     }
 
     .map-frame img {
@@ -64,14 +139,126 @@
       border-color: #facc15;
     }
 
-    /* Biểu tượng cột mốc trong các thẻ bên dưới sa bàn */
+    /* ==============================
+       NÚT PHÓNG TO SA BÀN
+    ============================== */
+
+    .map-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .map-toolbar-note {
+      color: #637269;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .map-zoom-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 11px 18px;
+      color: #ffffff;
+      background: #14532d;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .map-zoom-button:hover {
+      background: #166534;
+      transform: translateY(-1px);
+    }
+
+    .map-zoom-button:focus-visible {
+      outline: 3px solid #d9b96e;
+      outline-offset: 3px;
+    }
+
+    /* ==============================
+       CHÚ THÍCH HƯỚNG DẪN
+    ============================== */
+
+    .map-hint {
+      margin-top: 16px;
+      padding: 14px 17px;
+      color: #28553b;
+      background: #edf6ef;
+      border-left: 5px solid #d9b96e;
+      border-radius: 10px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .map-hint strong {
+      color: #14532d;
+    }
+
+    /* ==============================
+       DANH SÁCH CÁC MỐC QUỐC GIỚI
+    ============================== */
+
+    .marker-list-section {
+      margin-top: 28px;
+    }
+
+    .marker-list-section h2 {
+      margin-bottom: 16px;
+      color: #14532d;
+      font-size: 23px;
+    }
+
+    .marker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .marker-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 135px;
+      padding: 16px 12px;
+      color: #174b32;
+      text-align: center;
+      text-decoration: none;
+      background: #ffffff;
+      border: 1px solid #dce8df;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(20, 83, 45, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .marker-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 18px rgba(20, 83, 45, 0.12);
+    }
+
+    .marker-card:focus-visible {
+      outline: 3px solid #d9b96e;
+      outline-offset: 3px;
+    }
+
     .marker-card .marker-number.marker-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 10px;
+      width: 58px;
+      height: 58px;
+      margin: 0;
       overflow: hidden;
       background: transparent;
       border: none;
@@ -83,6 +270,239 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+
+    .marker-card strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .marker-card small {
+      display: block;
+      color: #718077;
+      font-size: 12px;
+    }
+
+    /* ==============================
+       CỬA SỔ PHÓNG TO TOÀN MÀN HÌNH
+    ============================== */
+
+    .map-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 18, 11, 0.96);
+    }
+
+    .map-lightbox.active {
+      display: flex;
+    }
+
+    .map-lightbox-content {
+      position: relative;
+      width: 100%;
+      max-width: 1500px;
+    }
+
+    .map-lightbox .map-frame {
+      width: 100%;
+      max-height: 88vh;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .map-lightbox .map-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+
+    .map-lightbox-close {
+      position: absolute;
+      top: -17px;
+      right: -12px;
+      z-index: 100001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      color: #ffffff;
+      background: #14532d;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .map-lightbox-caption {
+      margin-top: 13px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    body.map-lightbox-open {
+      overflow: hidden;
+    }
+
+    /* ==============================
+       TỐI ƯU CHO ĐIỆN THOẠI
+    ============================== */
+
+    @media (max-width: 600px) {
+      .map-page-intro {
+        margin: 12px 0 16px;
+      }
+
+      .map-page-intro h1 {
+        font-size: 25px;
+        line-height: 1.3;
+      }
+
+      .map-page-intro p {
+        font-size: 14px;
+      }
+
+      .map-main-card {
+        margin: 12px 0 22px;
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      .map-card-heading {
+        margin-bottom: 9px;
+      }
+
+      .map-card-heading h2 {
+        font-size: 19px;
+      }
+
+      .map-card-description {
+        margin-bottom: 13px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .map-frame {
+        border-radius: 11px;
+      }
+
+      .map-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .map-toolbar-note {
+        font-size: 12px;
+      }
+
+      .map-zoom-button {
+        width: 100%;
+        min-height: 46px;
+        font-size: 14px;
+      }
+
+      .map-hint {
+        margin-top: 12px;
+        padding: 12px 13px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .marker-list-section {
+        margin-top: 22px;
+      }
+
+      .marker-list-section h2 {
+        font-size: 20px;
+      }
+
+      .marker-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .marker-card {
+        min-height: 112px;
+        padding: 12px 8px;
+        gap: 6px;
+        border-radius: 12px;
+      }
+
+      .marker-card .marker-number.marker-icon {
+        width: 46px;
+        height: 46px;
+      }
+
+      .marker-card strong {
+        font-size: 14px;
+      }
+
+      .marker-card small {
+        font-size: 11px;
+      }
+
+      .map-lightbox {
+        padding: 10px;
+      }
+
+      .map-lightbox-content {
+        width: 100%;
+      }
+
+      .map-lightbox .map-frame {
+        max-height: 82vh;
+        border-radius: 7px;
+      }
+
+      .map-lightbox .map-frame img {
+        max-height: 82vh;
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .map-lightbox-close {
+        top: -12px;
+        right: -4px;
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+      }
+
+      .map-lightbox-caption {
+        font-size: 12px;
+      }
+    }
+
+    /* Khi điện thoại xoay ngang */
+    @media (max-width: 900px) and (orientation: landscape) {
+      .map-lightbox {
+        padding: 8px;
+      }
+
+      .map-lightbox .map-frame {
+        max-height: 88vh;
+      }
+
+      .map-lightbox .map-frame img {
+        max-height: 88vh;
+        width: 100%;
+        object-fit: contain;
+      }
     }
   </style>
 </head>
@@ -104,102 +524,251 @@
       <a href="index.html">Trang chủ</a> / Sa bàn
     </p>
 
-    <h1>Sa bàn hệ thống mốc quốc giới</h1>
+    <section class="map-page-intro">
+      <h1>Sa bàn hệ thống mốc quốc giới</h1>
+      <p>
+        Chạm vào vị trí cột mốc trên sa bàn để khám phá thông tin chi tiết,
+        hoặc chọn số mốc bên dưới.
+      </p>
+    </section>
 
-    <p class="muted">
-      Rê chuột vào vùng cột mốc để làm sáng vị trí.
-      Bấm vào cột mốc để mở trang thông tin chi tiết.
-    </p>
-
-    <div class="map-frame">
-      <img
-        src="assets/sa-ban-3d.png"
-        alt="Sa bàn hệ thống mốc quốc giới"
-      >
-
-      <div class="map-hotspots">
-        <a href="pages/moc-41.html"
-           aria-label="Mở thông tin mốc 41"
-           title="Mốc 41"
-           style="left:9%;top:4%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-42.html"
-           aria-label="Mở thông tin mốc 42"
-           title="Mốc 42"
-           style="left:9%;top:23%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-44.html"
-           aria-label="Mở thông tin mốc 44"
-           title="Mốc 44"
-           style="left:10%;top:42%;width:11%;height:17%"></a>
-
-        <a href="pages/moc-45.html"
-           aria-label="Mở thông tin mốc 45"
-           title="Mốc 45"
-           style="left:18%;top:59%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-46.html"
-           aria-label="Mở thông tin mốc 46"
-           title="Mốc 46"
-           style="left:23%;top:72%;width:10%;height:17%"></a>
-
-        <a href="pages/moc-47.html"
-           aria-label="Mở thông tin mốc 47"
-           title="Mốc 47"
-           style="left:28%;top:84%;width:10%;height:15%"></a>
+    <section class="map-main-card">
+      <div class="map-card-heading">
+        <h2>Sa bàn địa hình 3D</h2>
       </div>
-    </div>
 
-    <div class="marker-grid">
-      <a class="marker-card" href="pages/moc-41.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
-        </span>
-        <strong>Mốc số 41</strong>
-      </a>
+      <p class="map-card-description">
+        Khám phá vị trí các cột mốc quốc giới trên sa bàn trực quan
+        của tỉnh Đắk Lắk.
+      </p>
 
-      <a class="marker-card" href="pages/moc-42.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
-        </span>
-        <strong>Mốc số 42</strong>
-      </a>
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn hệ thống mốc quốc giới"
+          fetchpriority="high"
+        >
 
-      <a class="marker-card" href="pages/moc-44.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
-        </span>
-        <strong>Mốc số 44</strong>
-      </a>
+        <div class="map-hotspots">
+          <a href="pages/moc-41.html"
+             aria-label="Mở thông tin mốc 41"
+             title="Mốc 41"
+             style="left:9%;top:4%;width:10%;height:17%"></a>
 
-      <a class="marker-card" href="pages/moc-45.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
-        </span>
-        <strong>Mốc số 45</strong>
-      </a>
+          <a href="pages/moc-42.html"
+             aria-label="Mở thông tin mốc 42"
+             title="Mốc 42"
+             style="left:9%;top:23%;width:10%;height:17%"></a>
 
-      <a class="marker-card" href="pages/moc-46.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
-        </span>
-        <strong>Mốc số 46</strong>
-      </a>
+          <a href="pages/moc-44.html"
+             aria-label="Mở thông tin mốc 44"
+             title="Mốc 44"
+             style="left:10%;top:42%;width:11%;height:17%"></a>
 
-      <a class="marker-card" href="pages/moc-47.html">
-        <span class="marker-number marker-icon">
-          <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          <a href="pages/moc-45.html"
+             aria-label="Mở thông tin mốc 45"
+             title="Mốc 45"
+             style="left:18%;top:59%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-46.html"
+             aria-label="Mở thông tin mốc 46"
+             title="Mốc 46"
+             style="left:23%;top:72%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-47.html"
+             aria-label="Mở thông tin mốc 47"
+             title="Mốc 47"
+             style="left:28%;top:84%;width:10%;height:15%"></a>
+        </div>
+      </div>
+
+      <div class="map-toolbar">
+        <span class="map-toolbar-note">
+          Có thể phóng to để quan sát rõ địa hình và vị trí các cột mốc.
         </span>
-        <strong>Mốc số 47</strong>
-      </a>
-    </div>
+
+        <button
+          class="map-zoom-button"
+          type="button"
+          id="openMapZoom"
+          aria-label="Phóng to sa bàn toàn màn hình"
+        >
+          <span aria-hidden="true">⛶</span>
+          Phóng to sa bàn
+        </button>
+      </div>
+
+      <div class="map-hint">
+        <strong>Hướng dẫn sử dụng:</strong>
+        Chạm vào vị trí cột mốc trên sa bàn để khám phá thông tin chi tiết,
+        hoặc chọn số mốc bên dưới.
+      </div>
+    </section>
+
+    <section class="marker-list-section">
+      <h2>Hệ thống mốc quốc giới</h2>
+
+      <div class="marker-grid">
+        <a class="marker-card" href="pages/moc-41.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 41</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+
+        <a class="marker-card" href="pages/moc-42.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 42</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+
+        <a class="marker-card" href="pages/moc-44.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 44</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+
+        <a class="marker-card" href="pages/moc-45.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 45</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+
+        <a class="marker-card" href="pages/moc-46.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 46</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+
+        <a class="marker-card" href="pages/moc-47.html">
+          <span class="marker-number marker-icon">
+            <img src="assets/icon-cot-moc.png.png" alt="Biểu tượng cột mốc quốc giới">
+          </span>
+          <strong>Mốc số 47</strong>
+          <small>Khám phá thông tin</small>
+        </a>
+      </div>
+    </section>
   </main>
+
+  <!-- CỬA SỔ PHÓNG TO SA BÀN -->
+  <div
+    class="map-lightbox"
+    id="mapLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Sa bàn hệ thống mốc quốc giới phóng to"
+    aria-hidden="true"
+  >
+    <div class="map-lightbox-content">
+      <button
+        class="map-lightbox-close"
+        type="button"
+        id="closeMapZoom"
+        aria-label="Đóng sa bàn phóng to"
+      >×</button>
+
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn hệ thống mốc quốc giới phóng to"
+        >
+
+        <div class="map-hotspots">
+          <a href="pages/moc-41.html"
+             aria-label="Mở thông tin mốc 41"
+             title="Mốc 41"
+             style="left:9%;top:4%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-42.html"
+             aria-label="Mở thông tin mốc 42"
+             title="Mốc 42"
+             style="left:9%;top:23%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-44.html"
+             aria-label="Mở thông tin mốc 44"
+             title="Mốc 44"
+             style="left:10%;top:42%;width:11%;height:17%"></a>
+
+          <a href="pages/moc-45.html"
+             aria-label="Mở thông tin mốc 45"
+             title="Mốc 45"
+             style="left:18%;top:59%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-46.html"
+             aria-label="Mở thông tin mốc 46"
+             title="Mốc 46"
+             style="left:23%;top:72%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-47.html"
+             aria-label="Mở thông tin mốc 47"
+             title="Mốc 47"
+             style="left:28%;top:84%;width:10%;height:15%"></a>
+        </div>
+      </div>
+
+      <p class="map-lightbox-caption">
+        Chạm vào vị trí cột mốc để mở trang thông tin chi tiết.
+        Xoay ngang điện thoại để quan sát sa bàn rõ hơn.
+      </p>
+    </div>
+  </div>
 
   <footer class="site-footer">
     Cẩm nang điện tử khu vực biên giới tỉnh Đắk Lắk
   </footer>
 
   <script>
+    /* ĐIỀU KHIỂN PHÓNG TO VÀ THU NHỎ SA BÀN */
+
+    const mapLightbox = document.getElementById("mapLightbox");
+    const openMapZoom = document.getElementById("openMapZoom");
+    const closeMapZoom = document.getElementById("closeMapZoom");
+
+    function showMapZoom() {
+      mapLightbox.classList.add("active");
+      mapLightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("map-lightbox-open");
+      closeMapZoom.focus();
+    }
+
+    function hideMapZoom() {
+      mapLightbox.classList.remove("active");
+      mapLightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("map-lightbox-open");
+      openMapZoom.focus();
+    }
+
+    openMapZoom.addEventListener("click", showMapZoom);
+
+    closeMapZoom.addEventListener("click", hideMapZoom);
+
+    mapLightbox.addEventListener("click", function(event) {
+      if (event.target === mapLightbox) {
+        hideMapZoom();
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (
+        event.key === "Escape" &&
+        mapLightbox.classList.contains("active")
+      ) {
+        hideMapZoom();
+      }
+    });
+
+    /* ĐĂNG KÝ SERVICE WORKER ĐỂ HỖ TRỢ SỬ DỤNG OFFLINE */
+
     if ("serviceWorker" in navigator &&
         location.protocol.startsWith("http")) {
       addEventListener("load", () => {
