@@ -115,11 +115,11 @@
       line-height: 1.7;
     }
 
-    /* SA BÀN: PHÓNG TO TRÊN MÁY TÍNH */
+    /* SA BÀN: NỘI DUNG TRUNG TÂM TRANG CHỦ */
     .map-frame {
       position: relative;
-      width: 120%;
-      margin-left: -10%;
+      width: 100%;
+      margin-left: 0;
       overflow: hidden;
       line-height: 0;
       border: 1px solid #d7e5d9;
@@ -331,13 +331,16 @@
     }
 
     @media (max-width: 600px) {
-      /* ĐIỆN THOẠI: PHÓNG TO SA BÀN 8% */
+      /* ƯU TIÊN HIỂN THỊ SA BÀN TRÊN ĐIỆN THOẠI */
+      .home-map-section {
+        margin-top: 12px;
+      }
+
       .map-frame {
         width: 100%;
         margin-left: 0;
-        transform: scale(1.08);
-        transform-origin: center center;
-        margin-bottom: 20px;
+        transform: none;
+        margin-bottom: 0;
       }
 
       .album-grid {
@@ -378,6 +381,62 @@
   </header>
 
   <main class="container">
+    <section class="section home-map-section">
+      <h2>Sa bàn hệ thống mốc quốc giới</h2>
+      <p>
+        Chọn trực tiếp vị trí cột mốc trên sa bàn để xem thông tin chi tiết.
+        Trên điện thoại, hãy chạm vào vùng cột mốc tương ứng.
+      </p>
+
+      <div class="map-frame">
+        <img
+          src="assets/sa-ban-3d.png"
+          alt="Sa bàn 3D hệ thống mốc quốc giới tỉnh Đắk Lắk"
+          fetchpriority="high">
+
+        <div class="map-hotspots">
+          <a href="pages/moc-41.html"
+             aria-label="Mở thông tin mốc quốc giới số 41"
+             title="Mốc quốc giới số 41"
+             style="left:9%;top:4%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-42.html"
+             aria-label="Mở thông tin mốc quốc giới số 42"
+             title="Mốc quốc giới số 42"
+             style="left:9%;top:23%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-44.html"
+             aria-label="Mở thông tin mốc quốc giới số 44"
+             title="Mốc quốc giới số 44"
+             style="left:10%;top:42%;width:11%;height:17%"></a>
+
+          <a href="pages/moc-45.html"
+             aria-label="Mở thông tin mốc quốc giới số 45"
+             title="Mốc quốc giới số 45"
+             style="left:18%;top:59%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-46.html"
+             aria-label="Mở thông tin mốc quốc giới số 46"
+             title="Mốc quốc giới số 46"
+             style="left:23%;top:72%;width:10%;height:17%"></a>
+
+          <a href="pages/moc-47.html"
+             aria-label="Mở thông tin mốc quốc giới số 47"
+             title="Mốc quốc giới số 47"
+             style="left:28%;top:84%;width:10%;height:15%"></a>
+        </div>
+      </div>
+
+      <div class="map-hint">
+        <strong>Cách sử dụng:</strong>
+        Chạm vào vùng cột mốc trên sa bàn hoặc chọn số mốc bên dưới.
+      </div>
+
+      <a class="map-open-page" href="saban.html">
+        Mở trang sa bàn riêng
+      </a>
+    </section>
+
     <section class="hero">
       <p>TÌM HIỂU • TRỰC QUAN • HỌC TẬP</p>
       <h1>Hệ thống mốc quốc giới tỉnh Đắk Lắk</h1>
@@ -477,62 +536,6 @@
       <button class="guide-close" type="button" data-guide-close>
         Thu gọn
       </button>
-    </section>
-
-    <section class="section home-map-section">
-      <h2>Sa bàn hệ thống mốc quốc giới</h2>
-      <p>
-        Chọn trực tiếp vị trí cột mốc trên sa bàn để xem thông tin chi tiết.
-        Trên điện thoại, hãy chạm vào vùng cột mốc tương ứng.
-      </p>
-
-      <div class="map-frame">
-        <img
-          src="assets/sa-ban-3d.png"
-          alt="Sa bàn 3D hệ thống mốc quốc giới tỉnh Đắk Lắk"
-          fetchpriority="high">
-
-        <div class="map-hotspots">
-          <a href="pages/moc-41.html"
-             aria-label="Mở thông tin mốc quốc giới số 41"
-             title="Mốc quốc giới số 41"
-             style="left:9%;top:4%;width:10%;height:17%"></a>
-
-          <a href="pages/moc-42.html"
-             aria-label="Mở thông tin mốc quốc giới số 42"
-             title="Mốc quốc giới số 42"
-             style="left:9%;top:23%;width:10%;height:17%"></a>
-
-          <a href="pages/moc-44.html"
-             aria-label="Mở thông tin mốc quốc giới số 44"
-             title="Mốc quốc giới số 44"
-             style="left:10%;top:42%;width:11%;height:17%"></a>
-
-          <a href="pages/moc-45.html"
-             aria-label="Mở thông tin mốc quốc giới số 45"
-             title="Mốc quốc giới số 45"
-             style="left:18%;top:59%;width:10%;height:17%"></a>
-
-          <a href="pages/moc-46.html"
-             aria-label="Mở thông tin mốc quốc giới số 46"
-             title="Mốc quốc giới số 46"
-             style="left:23%;top:72%;width:10%;height:17%"></a>
-
-          <a href="pages/moc-47.html"
-             aria-label="Mở thông tin mốc quốc giới số 47"
-             title="Mốc quốc giới số 47"
-             style="left:28%;top:84%;width:10%;height:15%"></a>
-        </div>
-      </div>
-
-      <div class="map-hint">
-        <strong>Cách sử dụng:</strong>
-        Chạm vào vùng cột mốc trên sa bàn hoặc chọn số mốc bên dưới.
-      </div>
-
-      <a class="map-open-page" href="saban.html">
-        Mở trang sa bàn riêng
-      </a>
     </section>
 
     <section class="section">
