@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="vi">
 <head>
@@ -114,11 +115,11 @@
       line-height: 1.7;
     }
 
-    /* PHÓNG TO SA BÀN TRANG CHỦ */
+    /* SA BÀN: PHÓNG TO TRÊN MÁY TÍNH */
     .map-frame {
       position: relative;
-      width: 112%;
-      margin-left: -6%;
+      width: 120%;
+      margin-left: -10%;
       overflow: hidden;
       line-height: 0;
       border: 1px solid #d7e5d9;
@@ -330,9 +331,13 @@
     }
 
     @media (max-width: 600px) {
+      /* ĐIỆN THOẠI: PHÓNG TO SA BÀN 8% */
       .map-frame {
         width: 100%;
         margin-left: 0;
+        transform: scale(1.08);
+        transform-origin: center center;
+        margin-bottom: 20px;
       }
 
       .album-grid {
